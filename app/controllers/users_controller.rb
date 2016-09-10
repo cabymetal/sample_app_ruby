@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)    # Not the final implementation!
     @user.file_url="dummy"          # because not created the upload yet
     if @user.save
+      log_in @user
       flash[:success] = "User Created"
       redirect_to @user
       
