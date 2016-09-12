@@ -3,11 +3,12 @@
   <div class="field">
     <%= f.text_area :content, placeholder: "Crear publicacion..." %>
   </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
-  <span class="picture">
+  <span>Imagen:</span><span class="picture">
     <%= f.file_field :picture %>
   </span>
-  <span class="picture">
+  <span>Archivo:</span><span class="picture">
     <%= f.file_field :file %>
   </span>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+  
 <% end %>

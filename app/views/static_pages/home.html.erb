@@ -9,7 +9,7 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Publicaciones del usuario</h3>
+      <h3>Publicaciones del usuario <%= pluralize(current_user.microposts.count, "micropost") %></h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
@@ -18,7 +18,7 @@
   <h1>Testing App</h1>
 
   <h2>
-    This is the home page for the Informese Portal based on the 
+    This is the home page for the <a href="http://www.informese.co/">Informese Portal</a> based on the 
     <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
     sample application.
   </h2>
