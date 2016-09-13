@@ -1,0 +1,10 @@
+<div class="well">
+  <%= form_for @resume, html: { multipart: true } do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :file %>
+    <%= f.text_field :file %>
+    <%= f.label :file_url %>
+    <%= f.file_field :file_url %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+</div>

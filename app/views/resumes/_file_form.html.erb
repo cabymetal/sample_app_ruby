@@ -1,0 +1,16 @@
+<div class="well">
+  <%= form_for @resume, html: { multipart: true, :class => "form-inline" } do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <div class="row">
+      <!--<label class="btn btn-default" for="my-file-selector">
+          <input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val().replace(/C:\\fakepath\\/i, ''));">
+            Upload File 
+          </input>
+      </label>
+      <span class='label label-info' id="upload-file-info"></span> -->
+        <div class="col-md-3"><%= f.label :file_url %></div>
+        <div class="col-md-7"><%= f.file_field :file_url , options = {:required => true} %></div>
+        <div class="col-md-2"><%= f.submit "Subir Archivo", class: "btn btn-primary btn-xs" %></div>
+      </div>
+  <% end %>
+</div>

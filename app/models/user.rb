@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   has_many :microposts, dependent: :destroy
+  has_many :resumes,    dependent: :destroy
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   before_save { self.email = email.downcase }
   validates(:name, presence: true, length: { maximum: 30 })
@@ -41,5 +42,10 @@ class User < ApplicationRecord
   
   def feed
     Micropost.where("user_id = ?", id)
+  end
+  
+  #gets the files associated to one user
+  def file_feed
+    Resume.where("user_id = ?", id)
   end
 end
