@@ -2,7 +2,7 @@ class ResumesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :new, :index]
   before_action :correct_user,   only: :destroy
   def index
-    @resumes = current_user.resumes
+    @resumes = current_user.resumes.paginate(:per_page => 7, :page => params[:page])
     @resume = Resume.new
     @uploaded_files = current_user.file_feed.paginate(:per_page => 5,page: params[:page])
   end

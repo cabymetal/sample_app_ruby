@@ -16,31 +16,32 @@
     <%= render "file_form"%>
   </div>
 </div>
-<%= #link_to "New Resume", new_resume_path, class: "btn btn-primary" 
-%>
-<br />
-<br />
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Usuario que lo subio</th>
-      <th>Descarga de Archivo</th>
-      <th>Borrar de Archivo</th>
-      <th>Fecha de subida</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @resumes.each do |resume| %>
+
+<div class="row">
+  <h3>Archivos disponibles</h3><hr>
+  <table class="table table-striped table-condensed">
+    <thead>
       <tr>
-        <td><%= resume.user.name %></td>
-        <td><%= 
-          if resume.file_url?
-            link_to File.basename(resume.file_url.url), resume.file_url.url, download: File.basename(resume.file_url.url)
-          end %></td>
-        <td><%= link_to "Eliminar Archivo", resume, method: :delete, class: "btn btn-danger", 
-             data: {confirm: "Are you sure that you wish to delete #{resume.file}?"} %></td>
-        <td> Posted <%= time_ago_in_words(resume.created_at) %> ago.
+        <th>Usuario original</th>
+        <th>Descarga de Archivo</th>
+        <th>Borrar de Archivo</th>
+        <th>Fecha de subida</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @resumes.each do |resume| %>
+        <tr>
+          <td><%= resume.user.name %></td>
+          <td><%= 
+            if resume.file_url?
+              link_to File.basename(resume.file_url.url), resume.file_url.url, download: File.basename(resume.file_url.url)
+            end %></td>
+          <td><%= link_to "Eliminar Archivo", resume, method: :delete, class: "btn btn-danger btn-xs", 
+               data: {confirm: "Are you sure that you wish to delete #{resume.file}?"} %></td>
+          <td> Posted <%= time_ago_in_words(resume.created_at) %> ago.
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @resumes %>
+</div>
