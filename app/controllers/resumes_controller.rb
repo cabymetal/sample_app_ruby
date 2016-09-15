@@ -2,9 +2,13 @@ class ResumesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :new, :index]
   before_action :correct_user,   only: :destroy
   def index
-    @resumes = current_user.resumes.paginate(:per_page => 7, :page => params[:page])
+    @resumes = current_user.resumes.search(params[:search]).paginate(:per_page => 7, :page => params[:page])
     @resume = Resume.new
-    @uploaded_files = current_user.file_feed.paginate(:per_page => 5,page: params[:page])
+    
+    respond_to do |format|
+      format.html {}
+      format.js { }
+    end
   end
 
   def new
@@ -17,7 +21,8 @@ class ResumesController < ApplicationController
       flash[:success] = "Archivo subido correctamente"
       redirect_to resumes_path
     else
-      render "new"
+      @resumes = current_user.resumes.search(params[:search]).paginate(:per_page => 7, :page => params[:page])
+      render "index"
     end
   end
 
@@ -27,6 +32,7 @@ class ResumesController < ApplicationController
     redirect_to resumes_path
     
   end
+  
   
   private
     def resume_params
