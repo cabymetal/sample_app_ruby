@@ -16,8 +16,8 @@
             link_to File.basename(resume.file_url.url), resume.file_url.url, download: File.basename(resume.file_url.url)
           end %></td>
         <td><%= link_to "Eliminar Archivo", resume, method: :delete, class: "btn btn-danger btn-xs", 
-             data: {confirm: "Are you sure that you wish to delete #{resume.file}?"} %></td>
-        <td> Posted <%= time_ago_in_words(resume.created_at) %> ago.
+             data: {confirm: "Seguro que quieres eliminar el archivo: #{resume.file}?"} %></td>
+        <td> <%= time_ago_in_words(resume.created_at) %>.
       </tr>
     <% end %>
   </tbody>
