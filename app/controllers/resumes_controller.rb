@@ -1,6 +1,8 @@
 class ResumesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :new, :index]
   before_action :correct_user,   only: :destroy
+  around_action :with_locale
+  
   def index
     @resumes = current_user.resumes.search(params[:search]).paginate(:per_page => 7, :page => params[:page])
     @resume = Resume.new
@@ -42,5 +44,13 @@ class ResumesController < ApplicationController
     def correct_user
       @resume = current_user.resumes.find_by(id: params[:id])
       redirect_to root_url if @resume.nil?
+    end
+    
+    def with_locale
+      I18n.with_locale(params[:locale]) { yield }
+    end
+    
+    def default_url_options(options = {})
+      { locale: I18n.locale }
     end
 end

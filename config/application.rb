@@ -6,6 +6,13 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+module I18nTest
+  class Application < Rails::Application
+    config.i18n.default_locale = 'es-CO'
+    config.time_zone = 'Bogota'
+  end
+end
+
 module SampleApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
